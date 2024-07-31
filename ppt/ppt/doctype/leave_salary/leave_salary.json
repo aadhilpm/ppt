@@ -1,0 +1,222 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2024-07-25 12:37:08.763178",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_2buu",
+  "employee",
+  "leave_application",
+  "from_date",
+  "to_date",
+  "amended_from",
+  "column_break_tton",
+  "posting_date",
+  "company",
+  "leave_type",
+  "leave_balance_before_from_date",
+  "naming_series",
+  "salary_details_section",
+  "get_latest_salary_details",
+  "leave_salary_details",
+  "column_break_pcnu",
+  "total_salary",
+  "total_considered_salary",
+  "per_day_salary",
+  "total_leave_salary",
+  "payment_details_section",
+  "provision_account",
+  "paid_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_2buu",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Leave Salary",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "leave_application",
+   "fieldtype": "Link",
+   "label": "Leave Application",
+   "link_filters": "[[\"Leave Application\",\"employee\",\"=\",\"eval:doc.employee\"],[\"Leave Application\",\"status\",\"=\",\"Approved\"]]",
+   "options": "Leave Application"
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "label": "Employee",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "column_break_tton",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fetch_from": "leave_application.leave_type",
+   "fieldname": "leave_type",
+   "fieldtype": "Link",
+   "label": "Leave Type",
+   "options": "Leave Type",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "leave_application.from_date",
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "leave_application.to_date",
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "leave_application.custom_leave_balance_from_date",
+   "fieldname": "leave_balance_before_from_date",
+   "fieldtype": "Float",
+   "label": "Leave Balance Before From Date",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.leave_application",
+   "fieldname": "salary_details_section",
+   "fieldtype": "Section Break",
+   "label": "Salary Details"
+  },
+  {
+   "fieldname": "get_latest_salary_details",
+   "fieldtype": "Button",
+   "label": "Get Latest Salary Details"
+  },
+  {
+   "fieldname": "leave_salary_details",
+   "fieldtype": "Table",
+   "label": "Leave Salary Details",
+   "options": "Leave Salary Details"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "naming series",
+   "options": "LS-.YY.-"
+  },
+  {
+   "fieldname": "column_break_pcnu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_salary",
+   "fieldtype": "Currency",
+   "label": "Total Salary",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_considered_salary",
+   "fieldtype": "Currency",
+   "label": "Total Monthly Salary Consider For Leave Salary",
+   "read_only": 1
+  },
+  {
+   "description": "Total Monthly Salary Consider For Leave Salary / 30",
+   "fieldname": "per_day_salary",
+   "fieldtype": "Currency",
+   "label": "Per Day Salary",
+   "read_only": 1
+  },
+  {
+   "description": "Leave Balance Before From Date X Per Day Salary",
+   "fieldname": "total_leave_salary",
+   "fieldtype": "Currency",
+   "label": "Total Leave Salary",
+   "read_only": 1
+  },
+  {
+   "fieldname": "payment_details_section",
+   "fieldtype": "Section Break",
+   "label": "Payment Details"
+  },
+  {
+   "default": "2120-003 - Provision for Vacation Allowance - PPT",
+   "fieldname": "provision_account",
+   "fieldtype": "Link",
+   "label": "Accruals & Provisions Account",
+   "options": "Account"
+  },
+  {
+   "fieldname": "paid_from",
+   "fieldtype": "Link",
+   "label": "Paid From",
+   "link_filters": "[[\"Account\",\"account_type\",\"in\",[\"Cash\",\"Bank\"]],[\"Account\",\"root_type\",\"=\",\"Asset\"]]",
+   "options": "Account"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-07-25 18:09:27.922085",
+ "modified_by": "Administrator",
+ "module": "Ppt",
+ "name": "Leave Salary",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accounts Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

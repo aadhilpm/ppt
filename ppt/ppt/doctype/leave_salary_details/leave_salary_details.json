@@ -1,0 +1,51 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-07-25 13:21:14.178093",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "salary_component",
+  "amount",
+  "leave_salary_calculation"
+ ],
+ "fields": [
+  {
+   "columns": 2,
+   "fieldname": "salary_component",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Salary Component",
+   "read_only": 1
+  },
+  {
+   "columns": 2,
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Amount",
+   "read_only": 1
+  },
+  {
+   "columns": 4,
+   "default": "0",
+   "fieldname": "leave_salary_calculation",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Consider for Leave Salary Calculation"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-07-25 14:45:03.955282",
+ "modified_by": "Administrator",
+ "module": "Ppt",
+ "name": "Leave Salary Details",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

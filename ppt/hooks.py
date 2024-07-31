@@ -235,3 +235,9 @@ fixtures = [
         }
     },
 ]
+
+doc_events = {
+    "Attendance": {
+        "validate": "ppt.overrides.attendance_override.custom_validate_attendance_date"
+    }
+}
