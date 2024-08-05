@@ -2,10 +2,54 @@
 # For license information, please see license.txt
 
 import frappe
+from frappe import _
 from frappe.model.document import Document
 
 class LeaveSalary(Document):
-	pass
+    def before_submit(self):
+        if not self.journal_entry:
+            self.create_journal_entry()
+
+    def on_cancel(self):
+        if self.journal_entry:
+            self.cancel_journal_entry()
+
+    def create_journal_entry(self):
+        # Create Journal Entry
+        journal_entry = frappe.get_doc({
+            "doctype": "Journal Entry",
+            "posting_date": self.posting_date,
+            "user_remark": f"Leave Salary for {self.employee}- {self.employee_name} Ref: {self.name}",
+            "voucher_type": "Journal Entry",
+            "cheque_no":self.name,
+            "cheque_date":self.posting_date,
+            "accounts": [
+                {
+                    "account": self.provision_account,
+                    "party_type": "Employee",
+                    "party": self.employee,
+                    "debit_in_account_currency": self.total_leave_salary,
+                },
+                {
+                    "account": self.paid_from,
+                    "credit_in_account_currency": self.total_leave_salary,
+                }
+            ]
+        })
+
+        journal_entry.insert()
+        journal_entry.submit()
+        self.journal_entry = journal_entry.name  # Set journal entry number into self.journal_entry field
+        frappe.msgprint(f"Journal Entry created: {journal_entry.name}")
+
+    def cancel_journal_entry(self):
+        # Check if a Journal Entry exists
+        if self.journal_entry:
+            journal_entry = frappe.get_doc("Journal Entry", self.journal_entry)
+
+            # Only cancel if it's already submitted
+            if journal_entry.docstatus == 1:
+                journal_entry.cancel()
 
 @frappe.whitelist()
 def get_all_current_salary_component_rate(employee):

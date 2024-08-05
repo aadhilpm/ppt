@@ -24,6 +24,11 @@ frappe.ui.form.on("Leave Salary", {
             frm.fields_dict.leave_salary_details.grid.grid_buttons.addClass('hidden');
         }
     },
+    validate:function (frm) {
+        if (frm.doc.docstatus === 0) {
+            frm.set_value('journal_entry', '');
+        }
+    },
     onload: function (frm) {
         if (frm.fields_dict.leave_salary_details && frm.fields_dict.leave_salary_details.grid) {
             frm.fields_dict.leave_salary_details.grid.grid_buttons.addClass('hidden');
