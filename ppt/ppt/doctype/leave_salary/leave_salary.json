@@ -18,6 +18,7 @@
   "company",
   "leave_type",
   "leave_balance_before_from_date",
+  "leave_payment_days",
   "naming_series",
   "journal_entry",
   "salary_details_section",
@@ -192,6 +193,16 @@
    "fieldtype": "Data",
    "label": "Employee Name",
    "read_only": 1
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.leave_application",
+   "description": "Please specify the payment days",
+   "fieldname": "leave_payment_days",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Leave Payment Days",
+   "mandatory_depends_on": "eval:doc.leave_application"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -202,7 +213,7 @@
    "link_fieldname": "cheque_no"
   }
  ],
- "modified": "2024-08-06 00:38:44.134133",
+ "modified": "2024-08-07 13:32:36.358472",
  "modified_by": "Administrator",
  "module": "Ppt",
  "name": "Leave Salary",

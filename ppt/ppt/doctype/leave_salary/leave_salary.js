@@ -24,6 +24,15 @@ frappe.ui.form.on("Leave Salary", {
             frm.fields_dict.leave_salary_details.grid.grid_buttons.addClass('hidden');
         }
     },
+    leave_payment_days: function (frm) {
+        if (frm.doc.leave_payment_days > frm.doc.leave_balance_before_from_date) {
+            frappe.msgprint("Leave Payment Days cannot be more than Available Leave Balance");
+            frm.set_value('leave_payment_days', 0);
+            calculate_totals(frm);
+        } else {
+            calculate_totals(frm);
+        }
+    },    
     validate:function (frm) {
         if (frm.doc.docstatus === 0) {
             frm.set_value('journal_entry', '');
@@ -39,7 +48,7 @@ frappe.ui.form.on("Leave Salary", {
 function calculate_totals(frm) {
     let total_salary = 0;
     let total_considered_salary = 0;
-    let leave_balance_before_from_date = frm.doc.leave_balance_before_from_date || 0;
+    let leave_payment_days = frm.doc.leave_payment_days|| 0;
 
     frm.doc.leave_salary_details.forEach(row => {
         total_salary += row.amount || 0;
@@ -50,7 +59,7 @@ function calculate_totals(frm) {
     });
 
     let per_day_salary = total_considered_salary / 30;
-    let total_leave_salary = per_day_salary * leave_balance_before_from_date;
+    let total_leave_salary = per_day_salary * leave_payment_days;
 
     frm.set_value('total_salary', total_salary);
     frm.set_value('total_considered_salary', total_considered_salary);
